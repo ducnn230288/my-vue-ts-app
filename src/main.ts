@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import './style.css';
+import './assets/styles/index.less';
 import App from './App';
 import i18next from './i18next';
 import 'virtual:svg-icons-register';

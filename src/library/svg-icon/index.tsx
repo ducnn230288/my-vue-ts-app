@@ -1,9 +1,8 @@
 import type { CSSProperties } from 'vue';
 import { defineComponent, computed, unref } from 'vue';
-import styles from './index.module.less';
 
-export default defineComponent({
-  name: 'SvgIcon',
+export const CSvgIcon = defineComponent({
+  name: 'CSvgIcon',
   props: {
     prefix: {
       type: String,
@@ -30,7 +29,7 @@ export default defineComponent({
     });
 
     return () => (
-      <svg class={styles['svg-icon']} style={unref(iconStyle)} aria-hidden='true'>
+      <svg style={unref(iconStyle)} aria-hidden='true'>
         <use href={unref(symbolId)} />
       </svg>
     );

@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply text-sm overflow-x-hidden bg-base-100 text-base-content leading-6;
+}
+h4 {
+  @apply text-lg font-bold;
+}
+* > {
+  .loop-intro-x(9);
+}
+.loop-intro-x(@counter) when (@counter > 0) {
+  .loop-intro-x((@counter - 1));
+  .intro-x:nth-child(@{counter}) {
+    @apply translate-x-12;
+  }
+  .-intro-x:nth-child(@{counter}) {
+    @apply -translate-x-12;
+  }
+  .-intro-x:nth-child(@{counter}),
+  .intro-x:nth-child(@{counter}) {
+    @apply opacity-0 animate-intro-x-animation;
+    z-index: (10 - @counter);
+    animation-delay: ~'0.@{counter}s';
+  }
+}
+
+.btn {
+  @apply rounded-lg flex items-center justify-center ~'gap-1.5' text-primary-content bg-primary hover:bg-primary/90;
+}
+svg {
+  fill: currentColor;
+}
+
+.l-login {
+  @apply block lg:flex justify-between h-full bg-cover bg-no-repeat relative;
+  background-image: url(/assets/images/bg-login.jpg);
+  background-position: top right 25rem;
+
+  .ant-input {
+    @apply h-12;
+  }
+  > .mask {
+    @apply backdrop-blur-sm bg-base-100/30 absolute left-0 top-0 w-screen h-screen z-0;
+  }
+  > .wapper {
+    @apply w-full lg:max-w-md bg-base-100 h-screen flex items-center justify-between lg:items-center z-10 relative;
+    > .content {
+      @apply p-10 w-full;
+      > .t-head {
+        @apply inline-block border-b border-primary/30 mb-8;
+      }
+    }
+  }
+  h1 {
+    @apply text-2xl mb-4 font-bold leading-8 md:text-4xl md:leading-10;
+  }
+  h5 {
+    @apply mb-8;
+  }
+
+  .block-grap-1 {
+    @apply flex items-center ~'pb-0.5' gap-1;
+  }
+}

@@ -1,21 +1,21 @@
-import type { App } from "vue";
-import i18next from "i18next";
-import I18NextVue from "i18next-vue";
-import i18nextHttpBackend from "i18next-http-backend";
+import type { App } from 'vue';
+import i18next from 'i18next';
+import I18NextVue from 'i18next-vue';
+import i18nextHttpBackend from 'i18next-http-backend';
 
 const createI18nOptions = () => {
-  const fallbackLng = localStorage.getItem("i18nextLng");
+  const fallbackLng = localStorage.getItem('i18nextLng');
 
   if (!fallbackLng) {
-    localStorage.setItem("i18nextLng", "en");
-    document.querySelector("html")?.setAttribute("lang", "en");
+    localStorage.setItem('i18nextLng', 'en');
+    document.querySelector('html')?.setAttribute('lang', 'en');
   }
 
   return {
     backend: {
-      loadPath: "/locales/{{lng}}/{{ns}}.json",
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
-    fallbackLng: fallbackLng ?? "en",
+    fallbackLng: fallbackLng ?? 'en',
     interpolation: {
       escapeValue: false,
     },

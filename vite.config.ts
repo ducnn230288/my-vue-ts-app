@@ -1,4 +1,4 @@
-import { ConfigEnv, UserConfig, loadEnv } from 'vite';
+import { loadEnv, type ConfigEnv, type UserConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
@@ -13,6 +13,14 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 
   const isBuild = command === 'build';
   return {
+    server: {
+      host: true,
+      open: true,
+      port: VITE_PORT,
+      watch: {
+        usePolling: true,
+      },
+    },
     plugins: [
       vue(),
       vueJsx(),
@@ -22,6 +30,22 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         symbolId: 'icon-[dir]-[name]',
       }),
     ],
+    build: {
+      target: 'es2015',
+      cssTarget: 'chrome86',
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          keep_infinity: true,
+          drop_console: isBuild,
+        },
+      },
+      chunkSizeWarningLimit: 600,
+      outDir: './build',
+    },
+    resolve: {
+      alias: [{ find: /^~/, replacement: '' }],
+    },
   };
 };
 
